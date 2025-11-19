@@ -26,7 +26,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./ALL:/usr/local/apache2/htdocs
+      - ./ALL:/var/www/html
     networks:
       proyecto_net:
         #ipv4_address: 172.25.0.03

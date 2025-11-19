@@ -1,0 +1,5 @@
+#BACKUP A LA BD TODOS LOS DIAS A LAS 02:00
+0 2 * * * /home/Domisoft/proyecto_docker/scripts/04_backup_bd.sh >> /var/log/backup_bd.log 2>&1
+
+#BACKUP DE ARCHIVOS A LAS 02:10
+10 2 * * * /home/Domisoft/proyecto_docker/scripts/05_backup_archivos.sh >> /var/log/backup_archivos.log 2>&1

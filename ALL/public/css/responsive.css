@@ -1,0 +1,51 @@
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          responsive.css
+* Author:        domisoft-dev
+* Description:   Estilos responsivos para dispositivos móviles y pantallas pequeñas.
+================================================================================
+* Sections Overview:
+* - @media (max-width: 768px): ajustes para dispositivos con ancho máximo de 768px
+*   - .side-nav: oculta la navegación lateral
+*   - .hero / .hero h1 / .hero p: ajustes de padding y tamaño de texto en hero
+*   - .relleno: padding lateral
+*   - .floating-nav / .floating-nav ul: ajuste de ancho, padding y disposición vertical de links
+================================================================================
+* Libraries: None
+================================================================================
+*/
+
+@media (max-width: 768px) {
+  .side-nav {
+    display: none;
+  }
+
+  .hero {
+    padding-left: 20px;
+  }
+
+  .relleno {
+    padding-left: 20px;
+  }
+
+  .hero h1 {
+    font-size: 2.3rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  .floating-nav {
+    width: 90%;
+    left: 5%;
+    padding: 10px 20px;
+  }
+
+  .floating-nav ul {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+}

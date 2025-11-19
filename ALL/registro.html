@@ -1,0 +1,144 @@
+<!--
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          registro.html
+* Author:        domisoft-dev
+* Description:   Página de registro de nuevos usuarios para COVIAMU.
+*                Permite crear cuentas pendientes de aprobación y actualizar datos.
+================================================================================
+* Librerías:
+* - Boxicons (https://cdn.boxicons.com)
+* - SweetAlert2 (https://cdn.jsdelivr.net/npm/sweetalert2@11)
+================================================================================
+* Sections Overview:
+* - HTML: estructura de la página, formularios, navegación y botones
+* - JS: funciones handleFormSubmit, createUser, updateUser, deleteUser, editUser, clearForm
+*       - Manejo de eventos submit del formulario
+*       - Envío de datos al endpoint via fetch
+*       - Feedback con SweetAlert2
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro - COVIAMU</title>
+  <link rel="stylesheet" href="public/css/main.css">
+  <script src="public/js/verifyLog.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  
+<nav class="floating-nav">
+    <a href="index"><img src="public/img/coviamu.webp" class="coviamuLogo" alt="COVIAMU Logo"></a>
+    <div id="txts">
+      <ul>
+        <li><a href="index">Inicio</a></li>
+        <li><a href="index#nosotros">Nosotros</a></li>
+        <li><a href="index#contacto">Contacto</a></li>
+        <li><a href="login">Mi cuenta</a></li>
+        <li><a href="registro" class="btn">Ser parte <i class="bx bx-arrow-up-right-stroke bx-beat"></i></a></li>
+      </ul>
+    </div>
+
+    <div id="txts">
+      <a href="admin">Gestión <i class='bx  bxs-key'  ></i></a>
+    </div>
+  </nav>
+
+  <h1 class="form-title">Registrarse</h1>
+
+  <form id="user-form" onsubmit="handleFormSubmit(event)">
+    <input type="hidden" id="user-id">
+    <input type="text" id="user-name" placeholder="Nombre" required>
+    <input type="email" id="user-email" placeholder="Correo electrónico" required>
+    <input type="password" id="user-contrasena" placeholder="Contrasena" required>
+    <button type="submit" class="bold">Continuar</button>
+  </form>
+
+  <p class="login-link">¿Ya tienes cuenta? <a href="login">Inicia sesión.</a></p>
+
+  <hr>
+
+  <div id="users"></div>
+
+  <script>
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const id = document.getElementById("user-id").value;
+      const name = document.getElementById("user-name").value;
+      const email = document.getElementById("user-email").value;
+      const contrasena = document.getElementById("user-contrasena").value;
+      const estado = 'no_aprobado';
+
+      if (id) {
+        updateUser(parseInt(id), name, email, contrasena, estado);
+      } else {
+        createUser(name, email, contrasena, estado);
+      }
+
+      clearForm();
+    }
+
+  function createUser(name, email, contrasena, estado) {
+    fetch('public/endpointUsers.php', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name, email, contrasena, estado })
+})
+.then(async res => {
+  const text = await res.text();
+  if (!text) throw new Error("Respuesta vacía del servidor");
+  try {
+    return JSON.parse(text);
+  } catch(e) {
+    throw new Error("JSON inválido: " + text);
+  }
+})
+.then(data => {
+  console.log('JSON:', data);
+  Swal.fire({
+    title: data.success ? 'Usuario creado' : 'Error',
+    text: data.error || 'El usuario está pendiente de aprobación.',
+    icon: data.success ? 'success' : 'error',
+    confirmButtonText: 'Aceptar'
+  });
+})
+.catch(err => console.error('Error en fetch:', err));
+}
+
+    function updateUser(id, name, email, contrasena, estado) {
+      fetch('index.php', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, name, email, contrasena, estado })
+      }).then(loadUsers);
+    }
+
+    function deleteUser(id) {
+      fetch('index.php', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      }).then(loadUsers);
+    }
+
+    function editUser(id, name, email, contrasena) {
+      document.getElementById("user-id").value = id;
+      document.getElementById("user-name").value = name;
+      document.getElementById("user-email").value = email;
+      document.getElementById("user-contrasena").value = contrasena;
+    }
+    function clearForm() {
+      document.getElementById("user-id").value = '';
+      document.getElementById("user-name").value = '';
+      document.getElementById("user-email").value = '';
+      document.getElementById("user-contrasena").value = '';
+    }
+
+  </script>
+
+</body>
+</html>

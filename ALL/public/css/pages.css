@@ -1,0 +1,192 @@
+/*
+================================================================================
+* Project:       https://github.com/domisoft-dev/coviamu
+* File:          pages.css
+* Author:        domisoft-dev
+* Description:   Estilos para secciones de página, hero, cards, contacto y usuarios.
+================================================================================
+* Sections Overview:
+* - .hero / .hero-content / .hero h1 / .hero p / .hero .btn2: estilos de la sección principal
+* - .txtLine: barra de texto dentro del hero
+* - .section-card / .card / .card h2 / .card p: estilos de cards informativas
+* - .contact-card a: enlaces de contacto
+* - #users-container / .user-card / .user-table / .user-info / .user-actions: estilos de lista de usuarios y acciones
+================================================================================
+* Libraries: None
+================================================================================
+*/
+
+.hero {
+  min-height: max-content;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),
+              url("../img/stock.jpg") no-repeat center center;
+  background-size: cover;
+  transition: background 1s ease-in-out;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: rgb(255, 109, 109);
+}
+
+.hero p {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.hero .btn2 {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  background-color: rgb(255, 109, 109);
+  color: white;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.hero .btn2:hover {
+  background-color: rgb(255, 148, 148);
+}
+
+.txtLine {
+  background-color: #fff;
+  border-radius: 1rem;
+  opacity: 80%;
+  padding: 0.5rem 1.3rem;
+}
+
+.section-card {
+  display: flex;
+  justify-content: center;
+  padding: 80px 20px;
+  background-color: #f0f8ff;
+}
+
+.card {
+  max-width: 800px;
+  background: linear-gradient(145deg, #ffffff, #ffe6e6);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-0.2rem);
+}
+
+.card h2 {
+  font-size: 2.2rem;
+  color: rgb(255, 109, 109);
+  margin-bottom: 1rem;
+}
+
+.card p {
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+.contact-card a {
+  color: rgb(255, 109, 109);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
+
+/* ================= USERS ================= */
+#users-container {
+  max-width: 90%; /* más ancho */
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff; /* blanco */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* sombra marcada */
+}
+
+.user-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.user-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.user-table {
+    border-collapse: separate;
+    border-spacing: 1rem 1rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* separación nombre-mail */
+}
+
+.user-info h3, .user-info p {
+  margin: 0;
+  color: #fff; /* texto blanco */
+  padding: 4px 10px;
+  border-radius: 8px;
+  background-color: #fa6464; /* contraste */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.user-actions {
+  display: flex;
+  gap: 10px; /* botones uno al lado del otro */
+}
+
+.user-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.user-actions .accept {
+  background-color: #28a745;
+  color: white;
+}
+
+.user-actions .accept:hover {
+  background-color: #34c759;
+  transform: translateY(-2px);
+}
+
+.user-actions .reject {
+  background-color: #dc3545;
+  color: white;
+}
+
+.user-actions .reject:hover {
+  background-color: #e55353;
+  transform: translateY(-2px);
+}

@@ -20,7 +20,7 @@
 
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("Location: /coviamu/login");
+    header("Location: /login");
     exit;
 }
 ?>
